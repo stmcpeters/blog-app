@@ -34,6 +34,20 @@ app.get('/api/entries', async (req, res) => {
   }
 })
 
+// post request to create new entry
+app.post('/api/entries', async (req, res) => {
+  try {
+    const {title, content, author_username, tags} = req.body;
+    const result = await db.query(
+    'INSERT INTO entries (title, content, author_username, tags) VALUES ($1, $2, $3, $4)', [title, content, author_username, tags]);
+    console.log(`New post by ${author_username} has been added to the database`);
+    res.json(result.rows[0]);
+
+  } catch (error) {
+    console.log('Error creating new entry: ', error);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`hi :D your server is on http://localhost:${PORT}`);
 });
