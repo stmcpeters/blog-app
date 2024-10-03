@@ -5,6 +5,7 @@ import MyNavbar from './components/NavBar'
 import ListEntries from './components/ListEntries';
 import pets from '/src/assets/pets-group.webp';
 import ListUsers from './components/ListUsers';
+import EntryForm from './components/EntryForm';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
       <img className="container-div" src={pets} alt="picture of different kinds of pets" />
       <ListEntries entries={entries}/>
       <ListUsers users={users} />
+      <EntryForm />
     </>
   )
 }
