@@ -10,7 +10,8 @@ const Entry = ({ entry }) => {
       <Card>
         <Card.Header className='card-header'>
           Posted by: {entry.author_username} <br></br>
-          Published at: {entry.created_at.split('T')[0]}
+          Published at: {entry.created_at.split('T')[0]} <br></br>
+          Tags: {entry.tags}
         </Card.Header>
         <Card.Body>
           <Card.Title>{entry.title}</Card.Title>
