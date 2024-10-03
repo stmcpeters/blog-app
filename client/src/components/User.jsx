@@ -10,13 +10,13 @@ const User = ({ users }) => {
     <>
       <Card>
         <Card.Body>
-          <ListGroup>
+          <ul className='display-users'>
             {users.map((user) => {
-              return <ListGroup.Item key={user.id}>
-                <span>{user.username}</span>
-              </ListGroup.Item>
+              return <li key={user.id}>
+                {user.username}
+              </li>
             })}
-          </ListGroup>
+          </ul>
         </Card.Body>
       </Card>
     </>

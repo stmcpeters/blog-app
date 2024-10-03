@@ -20,7 +20,7 @@ const ListUsers = () => {
 
   return (
     <div>
-      <h2>Online Users</h2>
+      <h2>Active Users</h2>
       <User users={users}/>
     </div>
   )
