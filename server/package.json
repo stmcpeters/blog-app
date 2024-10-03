@@ -1,4 +1,15 @@
 {
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "concurrently 'npm start' 'cd .. && cd client && npm run dev' ",
+    "start": "nodemon server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "concurrently": "^9.0.1",
     "cors": "^2.8.5",
