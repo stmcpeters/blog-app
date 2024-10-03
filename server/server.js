@@ -79,16 +79,16 @@ app.patch('/api/entries/:id', async (req, res) => {
 })
 
 // // delete an entry by id
-// app.delete('/api/entries/:id', async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const result = await db.query(`DELETE FROM entries WHERE id = $1`, [id]);
-//     res.status(204).send();
-//     console.log(`Entry with the id: ${id} has been deleted`)
-//   } catch (error) {
-//     console.log('Error fetching entries: ', error);
-//   }
-// })
+app.delete('/api/entries/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await db.query(`DELETE FROM entries WHERE id = $1`, [id]);
+    res.status(200).send();
+    console.log(`Entry with the id: ${id} has been deleted`)
+  } catch (error) {
+    console.log('Error fetching entries: ', error);
+  }
+})
 
 app.listen(PORT, () => {
   console.log(`hi :D your server is on http://localhost:${PORT}`);
