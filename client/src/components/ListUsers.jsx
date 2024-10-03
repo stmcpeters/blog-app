@@ -1,21 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import User from './User';
 
-const ListUsers = () => {
-
-  const [users, setUsers] = useState([])
-
-  const loadUsers = () => {
-    fetch("http://localhost:5001/api/users")
-      .then((response) => response.json())
-      .then((users) => {
-        setUsers(users);
-      });
-  }
-
-  useEffect(() => {
-    loadUsers();
-  }, [users]);
+const ListUsers = ({ users }) => {
 
 
   return (
