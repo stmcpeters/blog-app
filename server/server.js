@@ -48,6 +48,49 @@ app.post('/api/entries', async (req, res) => {
   }
 });
 
+// get entry by id
+app.get('/api/entries/:id', async (req, res) => {
+  try{
+    // initalizes id you're searching for
+    const { id } = req.params;
+    // query to search for entries matching given id
+    const result = await db.query(`SELECT * FROM entries WHERE id = $1`, [id]);
+    // return entry data as JSON
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error fetching entries: ', error);
+  }
+})
+
+// patch - update entry details by ID
+app.patch('/api/entries/:id', async (req, res) => {
+  try {
+    // initalizes id you're searching for
+    const { id } = req.params;
+    // gets properties to be updated
+    const { title, content, author_username, tags } = req.body;
+    // query to update entry by specified ID
+    const result = await db.query(`UPDATE entries SET title=$1, content=$2, author_username=$3, tags=$4 WHERE id = $5`, [title, content, author_username, tags, id]);
+    // message to confirm entry details have been updated
+    res.send(`Entry with the id ${id} has been updated in the database`);
+  } catch (error) {
+      console.log(`Cannot find entry matching id: `, error);
+  }
+})
+
+// // delete an entry by id
+// app.delete('/api/entries/:id', async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const result = await db.query(`DELETE FROM entries WHERE id = $1`, [id]);
+//     res.status(204).send();
+//     console.log(`Entry with the id: ${id} has been deleted`)
+//   } catch (error) {
+//     console.log('Error fetching entries: ', error);
+//   }
+// })
+
 app.listen(PORT, () => {
   console.log(`hi :D your server is on http://localhost:${PORT}`);
 });
+
