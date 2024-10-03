@@ -8,8 +8,8 @@ const Entry = ({ entry }) => {
   return (
     <>
       <Card>
-        <Card.Header>
-          New Post by: {entry.author_username} <br></br>
+        <Card.Header className='card-header'>
+          Posted by: {entry.author_username} <br></br>
           Published at: {entry.created_at.split('T')[0]}
         </Card.Header>
         <Card.Body>
