@@ -1,11 +1,12 @@
-import { useState } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
+import MyNavbar from './components/NavBar'
 
 function App() {
 
   return (
     <>
-      <h1>Testing</h1>
+      <MyNavbar />
     </>
   )
 }
