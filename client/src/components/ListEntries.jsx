@@ -23,7 +23,7 @@ const ListEntries = () => {
 
   return (
     <div className="list-entries">
-      <h2>Entries</h2>
+      <h2>Latest Entries</h2>
       <ul>
           {entries.map((entry) => {
             return <li key={entry.id}>
