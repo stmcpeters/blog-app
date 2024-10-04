@@ -16,14 +16,13 @@ const Entry = ({ entry, user, toggleDetails, showDetails }) => {
           <Card.Title>{entry.title}</Card.Title>
           <Card.Text>{entry.content}</Card.Text>
         </Card.Body>
-        <Button onClick={() => {handleShowDetails}}>Details</Button>
+        <Button onClick={() => {handleShowDetails()}}>Details</Button>
       </Card>
 
       {showDetails === entry.id && (
         <Card>
           <Card.Header>Details</Card.Header>
           <Card.Body>
-            <Card.Text>
               <ul>
                 <li>Posted by: {entry.author_username}</li>
                 <li>Email: {user.email}</li>
@@ -31,7 +30,6 @@ const Entry = ({ entry, user, toggleDetails, showDetails }) => {
                 <li>Published at: {entry.created_at.split('T')[0]}</li> 
                 <li>Tags: {entry.tags}</li>
               </ul>
-            </Card.Text>
           </Card.Body>
         </Card>
       )}

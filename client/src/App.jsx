@@ -40,7 +40,7 @@ function App() {
     <>
       <MyNavbar />
       <img className="container-div" src={pets} alt="picture of different kinds of pets" />
-      <ListEntries entries={entries}/>
+      <ListEntries entries={entries} users={users}/>
       <ListUsers users={users} />
       <EntryForm />
     </>

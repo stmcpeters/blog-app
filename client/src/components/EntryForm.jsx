@@ -67,11 +67,9 @@ const EntryForm = () => {
   }
 
   return (
-    <>
     <Card>
       <Card.Body>
         <Card.Title>Create New Entry</Card.Title>
-        <Card.Text>
           <Form onSubmit={onSubmit}>
             <Form.Group>
               <Form.Label>Username</Form.Label>
@@ -88,7 +86,7 @@ const EntryForm = () => {
                   required
                   onChange={handleTitleInputChange}
                 />
-              <Form.Label>Content</Form.Label>
+              <Form.Label>Entry Body</Form.Label>
                 <Form.Control 
                   type="text"
                   name="text"
@@ -105,10 +103,8 @@ const EntryForm = () => {
               <Button>Create Post</Button>
             </Form.Group>
           </Form>
-        </Card.Text>
       </Card.Body>
     </Card>
-    </>
     )
   }
 

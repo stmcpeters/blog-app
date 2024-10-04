@@ -18,7 +18,7 @@ const ListEntries = ({ entries, users }) => {
             return <li key={entry.id}>
               <Entry 
                 entry={entry}
-                users={users}
+                user={users.find((user) => user.username === entry.author_username)}
                 toggleDetails={toggleDetails}
                 showDetails={showDetails}
               />
