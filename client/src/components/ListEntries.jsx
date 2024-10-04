@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Entry from './Entry';
 
 
@@ -8,7 +8,11 @@ const ListEntries = ({ entries, users }) => {
 
   const toggleDetails = (id) => {
     setShowDetails(prevState => prevState === id ? null : id);
-}
+  }
+
+  const onSaveEntry = (newEntry) => {
+    setEntry((entry) => [...entry, newEntry]);
+  }
 
   return (
     <div className="list-entries">
@@ -21,6 +25,7 @@ const ListEntries = ({ entries, users }) => {
                 user={users.find((user) => user.username === entry.author_username)}
                 toggleDetails={toggleDetails}
                 showDetails={showDetails}
+                onSaveEntry={onSaveEntry}
               />
             </li>
           })}

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import React, {useState} from 'react';
 
-const EntryForm = () => {
+const EntryForm = ([ entry, onSaveEntry ]) => {
 
   // sets initial state of values inside the form
   const [valuesForm, setValuesForm] = useState({
@@ -52,18 +52,35 @@ const EntryForm = () => {
     }
   }
 
-  // const handleTagsInputChange = (event) => {
-  //   const tags = event.target.value;
-  //   setValuesForm((valuesForm) => ({ ...valuesForm, tags}));
-  //   if(tags === "") {
-  //     setError((error) => ({ ...error, errorTags: true}));
-  //   } else {
-  //     setError((error) => ({ ...error, errorTags: false}));
-  //   }
-  // }
+  const handleTagsInputChange = (event) => {
+    const tags = event.target.value;
+    setValuesForm((valuesForm) => ({ ...valuesForm, tags}));
+    if(tags === "") {
+      setError((error) => ({ ...error, errorTags: true}));
+    } else {
+      setError((error) => ({ ...error, errorTags: false}));
+    }
+  }
 
+    //A function to handle the post request
+    const postEntry = (newEntry) => {
+      return fetch("http://localhost:5001/api/entries", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newEntry),
+      })
+          .then((response) => {
+              return response.json();
+          })
+          .then((data) => {
+              onSaveEntry(data);
+              //this line just for cleaning the form
+              clearForm();
+          });
+  };
   const onSubmit = (event) => {
     event.preventDefault();
+    postEntry(valuesForm);
   }
 
   return (
@@ -77,6 +94,7 @@ const EntryForm = () => {
                   type="text"
                   name="username"
                   required
+                  value={entry.username}
                   onChange={handleUsernameInputChange}
                 />
               <Form.Label>Title</Form.Label>
@@ -84,6 +102,7 @@ const EntryForm = () => {
                   type="text"
                   name="title"
                   required
+                  value={entry.title}
                   onChange={handleTitleInputChange}
                 />
               <Form.Label>Entry Body</Form.Label>
@@ -91,12 +110,15 @@ const EntryForm = () => {
                   type="text"
                   name="text"
                   required
+                  value={entry.content}
                   onChange={handleContentInputChange}
                 />
               <Form.Label>Tags</Form.Label>
                 <Form.Control 
                   type="text"
                   name="tags"
+                  value={entry.tags}
+                  onChange={handleTagsInputChange}
                 />
             </Form.Group>
             <Form.Group>
