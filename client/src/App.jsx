@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
-import MyNavbar from './components/NavBar'
+import MyNavbar from './components/Navbar'
 import ListEntries from './components/ListEntries';
 import pets from '/src/assets/pets-group.webp';
 import ListUsers from './components/ListUsers';
