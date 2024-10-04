@@ -12,6 +12,10 @@ function App() {
   const [users, setUsers] = useState([]);
   const [entries, setEntries] = useState([]);
 
+  const onSaveEntry = (newEntry) => {
+    setEntries((entry) => [...entry, newEntry]);
+  }
+
   const loadUsers = () => {
     fetch("http://localhost:5001/api/users")
       .then((response) => response.json())
@@ -42,7 +46,7 @@ function App() {
       <img className="container-div" src={pets} alt="picture of different kinds of pets" />
       <ListEntries entries={entries} users={users}/>
       <ListUsers users={users} />
-      <EntryForm />
+      <EntryForm onSaveEntry={onSaveEntry} />
     </>
   )
 }
