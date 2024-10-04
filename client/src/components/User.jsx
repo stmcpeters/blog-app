@@ -8,6 +8,7 @@ const User = ({ users }) => {
     <>
       <Card>
         <Card.Body>
+          <Card.Title>Active Users</Card.Title>
           <ul>
             {users.map((user) => {
               return <li key={user.id}>

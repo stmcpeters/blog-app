@@ -95,6 +95,12 @@ const EntryForm = ({ entries, onSaveEntry }) => {
           })
   };
 
+// event.preventDefault() stops the form from being submitted normally
+// Object.values(valuesForm) gets all form values
+// checks if every value is truthy (not empty)
+// shows an alert if any fields are empty
+// postEntry(valuesForm) sends form data
+
   const onSubmit = (event) => {
     // console.log('submit called');
     event.preventDefault();
@@ -116,7 +122,7 @@ const EntryForm = ({ entries, onSaveEntry }) => {
   
 
   return (
-    <Card>
+    <Card className='form-entries'>
       <Card.Body>
         <Card.Title>Create New Entry</Card.Title>
           <Form onSubmit={onSubmit}>
