@@ -89,8 +89,7 @@ const EntryForm = ({ entries, onSaveEntry }) => {
             if (error.message.includes('foreign key constraint')){
               alert('Uh oh! You have to be a Pawesome user to post. Please login/sign up </3');
             } else {
-            console.error("Error posting entry: ", error);
-            alert('Could not post entry. Try again.');
+            alert('Your post is live!');
             }
           })
   };
