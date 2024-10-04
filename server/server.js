@@ -24,6 +24,20 @@ app.get('/api/users', async (req, res) => {
   }
 })
 
+// post request to create new user
+app.post('/api/users', async (req, res) => {
+  try {
+    const {username, email} = req.body;
+    const result = await db.query(
+    'INSERT INTO users (username, email) VALUES ($1, $2)', [username, email]);
+    console.log(`New user has been added to the database`);
+    res.json(result.rows[0]);
+
+  } catch (error) {
+    console.log('Error creating new user: ', error);
+  }
+});
+
 // fetches all entries data from entries table
 app.get('/api/entries', async (req, res) => {
   try {
