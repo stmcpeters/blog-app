@@ -1,6 +1,6 @@
 import { describe, it } from 'vitest';
 import {render, screen} from '@testing-library/react'
-import MyNavbar from './Navbar.jsx';
+import MyNavbar from '../Navbar.jsx';
 
 
 describe('Navbar', () => {
