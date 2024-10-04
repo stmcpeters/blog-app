@@ -77,6 +77,7 @@ For this template, the name of your db should be `blog`.
 - PUT `/api/entries/:id`: Updates an entry
 
 ## Stretch Goals/Help Wanted
+- Implement an AI feature
 - Field to create a new user
 - Filter/search entries by tag
 - Hide tags field from entry details if user does not assign tag to entry
