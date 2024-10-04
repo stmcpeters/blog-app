@@ -21,7 +21,6 @@ const Entry = ({ entry, user, toggleDetails, showDetails }) => {
 
       {showDetails === entry.id && (
         <Card>
-          <Card.Header>Details</Card.Header>
           <Card.Body>
               <ul>
                 <li>Posted by: {entry.author_username}</li>

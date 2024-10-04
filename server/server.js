@@ -24,6 +24,7 @@ app.get('/api/users', async (req, res) => {
   }
 })
 
+
 // post request to create new user
 app.post('/api/users', async (req, res) => {
   try {

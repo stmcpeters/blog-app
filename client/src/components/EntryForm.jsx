@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import React, {useState} from 'react';
 
-const EntryForm = () => {
+const EntryForm = ({ entries, onSaveEntry }) => {
 
   // sets initial state of values inside the form
   const [valuesForm, setValuesForm] = useState({
@@ -52,22 +52,77 @@ const EntryForm = () => {
     }
   }
 
-  // const handleTagsInputChange = (event) => {
-  //   const tags = event.target.value;
-  //   setValuesForm((valuesForm) => ({ ...valuesForm, tags}));
-  //   if(tags === "") {
-  //     setError((error) => ({ ...error, errorTags: true}));
-  //   } else {
-  //     setError((error) => ({ ...error, errorTags: false}));
-  //   }
-  // }
-
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const handleTagsInputChange = (event) => {
+    const tags = event.target.value;
+    setValuesForm((valuesForm) => ({ ...valuesForm, tags}));
+    if(tags === "") {
+      setError((error) => ({ ...error, errorTags: true}));
+    } else {
+      setError((error) => ({ ...error, errorTags: false}));
+    }
   }
 
+    //A function to handle the post request
+    const postEntry = (newEntry) => {
+        const updatedEntry ={
+          ...newEntry,
+          author_username: valuesForm.username
+        };
+
+      return fetch("http://localhost:5001/api/entries", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedEntry),
+      })
+          .then((response) => {
+              if(!response.ok) {
+                throw new Error('Network response was not ok')
+              }
+              return response.json();
+          })
+          .then((data) => {
+              onSaveEntry(data);
+              //this line just for cleaning the form
+              clearForm();
+          })
+          .catch((error) => {
+            if (error.message.includes('foreign key constraint')){
+              alert('Uh oh! You have to be a Pawesome user to post. Please login/sign up </3');
+            } else {
+            console.error("Error posting entry: ", error);
+            alert('Could not post entry. Try again.');
+            }
+          })
+  };
+
+// event.preventDefault() stops the form from being submitted normally
+// Object.values(valuesForm) gets all form values
+// checks if every value is truthy (not empty)
+// shows an alert if any fields are empty
+// postEntry(valuesForm) sends form data
+
+  const onSubmit = (event) => {
+    // console.log('submit called');
+    event.preventDefault();
+    if (Object.values(valuesForm).every(value => value.trim() === '')) {
+      alert('Please fill out all fields.');
+      return;
+    }
+    postEntry(valuesForm);
+  };  
+
+  const clearForm = () => {
+    setValuesForm({
+      username: "",
+      title: "",
+      content: "",
+      tags: ""
+    });
+  };
+  
+
   return (
-    <Card>
+    <Card className='form-entries'>
       <Card.Body>
         <Card.Title>Create New Entry</Card.Title>
           <Form onSubmit={onSubmit}>
@@ -77,6 +132,7 @@ const EntryForm = () => {
                   type="text"
                   name="username"
                   required
+                  value={valuesForm.username}
                   onChange={handleUsernameInputChange}
                 />
               <Form.Label>Title</Form.Label>
@@ -84,6 +140,7 @@ const EntryForm = () => {
                   type="text"
                   name="title"
                   required
+                  value={valuesForm.title}
                   onChange={handleTitleInputChange}
                 />
               <Form.Label>Entry Body</Form.Label>
@@ -91,16 +148,19 @@ const EntryForm = () => {
                   type="text"
                   name="text"
                   required
+                  value={valuesForm.content}
                   onChange={handleContentInputChange}
                 />
               <Form.Label>Tags</Form.Label>
                 <Form.Control 
                   type="text"
                   name="tags"
+                  value={valuesForm.tags}
+                  onChange={handleTagsInputChange}
                 />
             </Form.Group>
             <Form.Group>
-              <Button>Create Post</Button>
+              <Button type="submit">Create Post</Button>
             </Form.Group>
           </Form>
       </Card.Body>

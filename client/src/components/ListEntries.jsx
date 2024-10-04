@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Entry from './Entry';
 
 
@@ -8,7 +8,8 @@ const ListEntries = ({ entries, users }) => {
 
   const toggleDetails = (id) => {
     setShowDetails(prevState => prevState === id ? null : id);
-}
+  }
+
 
   return (
     <div className="list-entries">
