@@ -8,4 +8,9 @@ describe('Navbar', () => {
     render(<MyNavbar />)
     screen.debug();
   })
+
+  it('makes sure the site name is displayed in the navbar', () => {
+    render(<MyNavbar />)
+    expect(screen.getByText('Pawesome Pets')).toBeInTheDocument();
+  })
 })
