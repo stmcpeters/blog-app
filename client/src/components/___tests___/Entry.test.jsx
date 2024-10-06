@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react'
 
 import Entry from '../Entry'
 
+// displaying error user_since is undefined
 describe('Entry component', () => {
 
   // mock entry data
