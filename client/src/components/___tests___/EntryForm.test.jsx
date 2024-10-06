@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 
 import EntryForm from '../EntryForm'
 
-  // tests display error with getByLabelText
+  // tests display error with getByLabelText and value setter (input vs change)
   it('should show the value in the username input as Tester', () => {
     render(<EntryForm />)
 
@@ -11,7 +11,7 @@ import EntryForm from '../EntryForm'
     // select username input box
     const usernameInput = screen.getAllByTestId('username');
     // simulates user typing value into textbox
-    fireEvent.change(usernameInput, {
+    fireEvent.input(usernameInput, {
       target: { value: 'Tester'},
     })
     // expect username textbox to have the value inputted
@@ -24,7 +24,7 @@ import EntryForm from '../EntryForm'
     
     const usernameInput = screen.getByLabelText(/Username/);
     
-    fireEvent.change(usernameInput, {
+    fireEvent.input(usernameInput, {
       target: { value: '' }
     });
     
