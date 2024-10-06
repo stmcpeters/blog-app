@@ -126,8 +126,9 @@ const EntryForm = ({ entries, onSaveEntry }) => {
         <Card.Title>Create New Entry</Card.Title>
           <Form onSubmit={onSubmit}>
             <Form.Group>
-              <Form.Label>Username</Form.Label>
+              <Form.Label >Username</Form.Label>
                 <Form.Control 
+                  data-testid='username'
                   type="text"
                   name="username"
                   required

@@ -1,19 +1,33 @@
 import * as React from 'react'
-import { render, screen, getByLabelText } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import '@testing-library/jest-dom'
+import { render, screen, fireEvent } from '@testing-library/react'
 
 import EntryForm from '../EntryForm'
 
-describe('the form to create a new entry', ()=> {
-  it('should show the text content in the username input as Tester', () => {
+  // tests display error with getByLabelText
+  it('should show the value in the username input as Tester', () => {
     render(<EntryForm />)
 
-    // select the entry username input box
-    const usernameInput = screen.getByLabelText(/Username/);
-    // simulate the user typing into the field
-    userEvent.type(usernameInput, 'Tester')
-    // checking if the usernameInput field has the value of Tester
+    // screen.debug();
+    // select username input box
+    const usernameInput = screen.getAllByTestId('username');
+    // simulates user typing value into textbox
+    fireEvent.change(usernameInput, {
+      target: { value: 'Tester'},
+    })
+    // expect username textbox to have the value inputted
     expect(usernameInput).toHaveValue('Tester');
   })
-})
+
+  // test for empty username field
+  test('should show error message when username is empty', () => {
+    render(<EntryForm />);
+    
+    const usernameInput = screen.getByLabelText(/Username/);
+    
+    fireEvent.change(usernameInput, {
+      target: { value: '' }
+    });
+    
+    expect(screen.getByText('Please fill out all fields.')).toBeInTheDocument();
+  });
+  
