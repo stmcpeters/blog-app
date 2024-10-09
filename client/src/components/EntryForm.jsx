@@ -126,9 +126,10 @@ const EntryForm = ({ entries, onSaveEntry }) => {
         <Card.Title>Create New Entry</Card.Title>
           <Form onSubmit={onSubmit}>
             <Form.Group>
-              <Form.Label >Username</Form.Label>
+              <Form.Label htmlFor="username">Username</Form.Label>
                 <Form.Control 
                   data-testid='username'
+                  id="username"
                   type="text"
                   name="username"
                   required
@@ -162,6 +163,7 @@ const EntryForm = ({ entries, onSaveEntry }) => {
             <Form.Group>
               <Button type="submit">Create Post</Button>
             </Form.Group>
+            <div id="error-message">Please fill out all fields.</div>
           </Form>
       </Card.Body>
     </Card>

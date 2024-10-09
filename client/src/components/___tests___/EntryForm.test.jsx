@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
+import { userEvent } from "@testing-library/user-event";
 
 import EntryForm from '../EntryForm'
 
@@ -9,13 +10,15 @@ import EntryForm from '../EntryForm'
 
     // screen.debug();
     // select username input box
-    const usernameInput = screen.getAllByTestId('username');
+    const usernameInput = screen.getByTestId('username');
+    expect(usernameInput).toHaveValue('')
     // simulates user typing value into textbox
-    fireEvent.input(usernameInput, {
+    fireEvent.change(usernameInput, {
       target: { value: 'Tester'},
     })
     // expect username textbox to have the value inputted
     expect(usernameInput).toHaveValue('Tester');
+    // expect(screen.getByText("Tester")).toBeInTheDocument();
   })
 
   // test for empty username field
